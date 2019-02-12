@@ -1,0 +1,79 @@
+Types of Tools:
+	Productivity Tools
+		Code Generation
+		Snippets
+		Rubber Duck
+
+	Code Quality Tools
+		Static Analysis
+		Test Frameworks/Runners
+		Linters
+		Code Coverage
+	
+	Debuggers
+		Xdebug
+		symfony\debug
+
+	Code Editors
+		Configurable
+		Extensible
+		Programmable
+
+Know:
+	What tools you have
+	Where your tools are
+	How to use them effectively
+
+Keep:
+	Your tools sharp
+
+Know what tools you have:
+	Within your OS
+		*nix/Windows
+
+Where your tools are:
+	Keep your tools within reach: "Tool Belt vs Workbench"
+		Tool Belt:
+			Your most useful/commonly used tools should be easiest to access.
+			Should be portable.
+
+		Workbench:
+			More powerful tools, used less often.
+			Accessible with minor effort.
+
+How to use them effectively
+	man
+	tldr
+	Stack Overflow
+
+Keeping your tools sharp
+	Tool Hygiene
+
+	Keep your tools up-to-date.
+	Craft your own configuration.
+		*nix dotfiles
+	If your workflow involves "workarounds" when it comes to your tools, they
+	are not workarounds; they are nuisances.
+
+Customize, customize, customize
+	Make your tools your own
+	IDE Integrations
+
+Share tools with others/your team
+	If it makes you more productive, it will help make your team more productive.
+		Git Hooks
+		Command aliases
+		CLI Utilities
+	Share tool config
+
+Always be acquiring new tools
+
+The tools we use should act as extensions of ourselves.
+
+Ideas:
+	Quote "The Pragmatic Programmer"
+	Show a video of a woodworking craftsman
+	Show a short clip of Adam Savage's "One Day Builds"
+		- 15:24:00
+	Japanese culture of work/tools
+	Focus on the "workflow" aspect of tooling
