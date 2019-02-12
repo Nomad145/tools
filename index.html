@@ -1,49 +1,158 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+        <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>Internals Time</h1>
+                </section>
+                <section>
+                    <h1>Typed Properties (PHP 7.4)</h1>
+                </section>
+                <section>
+                    <h4>Before:</h4>
+                    <pre><code data-trim data-noescape>
+                class User
+                {
+                    public $id;
+                    public $name;
+                }
+                    </code></pre>
+                    <h4>After:</h4>
+                    <pre><code data-trim data-noescape>
+                class User
+                {
+                    public Uuid $id;
+                    public FullName $name;
+                }
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Foreign Function Interface (PHP 7.4)</h1>
+                </section>
+                <section>
+                    <pre><code data-trim data-noescape>
+                $ffi = FFI::cdef("
+                    typedef unsigned int time_t;
+                    typedef unsigned int suseconds_t;
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+                    struct timeval {
+                        time_t      tv_sec;
+                        suseconds_t tv_usec;
+                    };
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+                    struct timezone {
+                        int tz_minuteswest;
+                        int tz_dsttime;
+                    };
+                ", "libc.so.6");
+                    </code></pre>
+                    <pre><code data-trim data-noescape>
+                $tv = $ffi->new("struct timeval");
+                $tz = $ffi->new("struct timezone");
+                var_dump($tv->tv_sec);
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Preloading! (PHP 7.4)
+                </section>
+                <section>
+                    <h1>Covariant Returns and Contravariant Parameters</h1>
+                </section>
+                <section>
+                    <h4>Contravariant (More Specific) Returns</h4>
+                    <pre><code data-trim data-noescape>
+                interface Factory {
+                    function make(): object;
+                }
+
+                class UserFactory implements Factory {
+                    function make(): User;
+                }
+                    </code></pre>
+                    <h4>Covariant (Less Specific) Parameters</h4>
+                    <pre><code data-trim data-noescape>
+                interface Concatable {
+                    function concat(Iterator $input); 
+                }
+
+                class Collection implements Concatable {
+                    function concat(iterable $input) {/* . . . */}
+                }
+                    </code></pre>
+                </section>
+                <section>
+                    <h1>Honing Your Craft</h1>
+                    <h2>A Developer's Toolbelt</h2>
+                </section>
+                <section>
+                    <h3>Michael Phillips</h2>
+                    <center>@nomad145</center>
+                </section>
+                <section>
+                    <section>
+                        <h3>Tool</h3>
+                        A device or implement, especially one held in the hand, used to carry out a particular function.
+                    </section>
+                    <section>Anything useful when it comes to getting things done.</section>
+                </section>
+                <section>
+                    <section>
+                        <h1>Tools and their types</h3>
+                    </section>
+                    <section><h1>Editor</h1></section>
+                    <section><h1>Productivity Tools</h1></section>
+                    <section><h1>Code Quality Tools</h1></section>
+                    <section><h1>Debuggers</h1></section>
+                </section>
+                <section>
+                    <section><h1>Michael's Principles for Tooling</h1></section>
+                    <section><h1>Know what tools you have</h1></section>
+                    <section><h1>Know where your tools are</h1></section>
+                    <section><h1>Know how to use your tools effectively</h1></section>
+                    <section><h1>Keep your tools sharp</h1></section>
+                    <section><h1>Customize, customize, customize</h1></section>
+                    <section><h1>Share your tools with others</h1></section>
+                </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
 </html>
